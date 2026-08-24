@@ -1,0 +1,1 @@
+import { haversineKm } from '../src/algorithms/haversine.js'; describe('haversine',()=>{it('returns zero for the same point',()=>expect(haversineKm({latitude:17.7,longitude:83.3},{latitude:17.7,longitude:83.3})).toBe(0));it('calculates a positive distance',()=>expect(haversineKm({latitude:17.7,longitude:83.3},{latitude:17.8,longitude:83.4})).toBeGreaterThan(1));});

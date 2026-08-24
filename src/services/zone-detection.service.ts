@@ -1,0 +1,2 @@
+import { prisma } from '../utils/prisma.js'; import { AppError } from '../utils/errors.js';
+export class ZoneDetectionService { async detect(postalCode:string) { const area=await prisma.area.findFirst({where:{postalCode,active:true},include:{zone:true}}); if(!area || !area.zone.active) throw new AppError(422,`No active delivery zone is mapped to postal code ${postalCode}`); return {area,zone:area.zone}; } }

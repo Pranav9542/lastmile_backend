@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output and caches
+dist/
+.vite/
+
+# Environment files (keep the safe template)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# TypeScript build info
+*.tsbuildinfo

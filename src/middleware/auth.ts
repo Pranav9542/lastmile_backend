@@ -1,0 +1,3 @@
+import { NextFunction, Request, Response } from 'express'; import jwt from 'jsonwebtoken'; import { Role } from '@prisma/client'; import { env } from '../config/env.js'; import { AppError } from '../utils/errors.js';
+export const authenticate = (req: Request,res: Response,next: NextFunction) => { const token=req.headers.authorization?.replace('Bearer ',''); if(!token) return next(new AppError(401,'Authentication required')); try { req.auth=jwt.verify(token,env.jwtSecret) as {id:string;role:Role}; next(); } catch { next(new AppError(401,'Invalid or expired token')); } };
+export const allow = (...roles: Role[]) => (req:Request,res:Response,next:NextFunction) => !req.auth || !roles.includes(req.auth.role) ? next(new AppError(403,'Insufficient permissions')) : next();
